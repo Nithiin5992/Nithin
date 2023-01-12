@@ -1,0 +1,5 @@
+var li = document.getElementsByTagname('li');
+console.log(li);
+console.log(items[2]);
+items[2].textcontent='Hello 2';
+items.style.fontweight ='bold';
