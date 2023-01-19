@@ -1,5 +1,12 @@
-var li = document.getElementsByTagname('li');
-console.log(li);
-console.log(items[2]);
-items[2].textcontent='Hello 2';
-items.style.fontweight ='bold';
+
+var element = document.querySelectorAll('.title');
+console.log(element);
+element[0].textContent='green'
+var item = document.querySelector('.list-group-item:nth-child(2)');
+item.style.color='green';
+var items = document.querySelector('.list-group-item:nth-child(3)');
+items.textContent="";
+var odd = document.querySelectorAll('.li:nth-child(odd)');
+for(var x=0;x<odd.length;x++){
+    odd[x].style.backgroundcolor='green';
+}
