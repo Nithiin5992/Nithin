@@ -69,3 +69,4 @@ function addItem(e){
       }
     });
   }
+  localStorage.setItem('item','searchitems')
