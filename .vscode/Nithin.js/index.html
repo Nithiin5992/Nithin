@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <style>
         form{
@@ -10,28 +9,17 @@
         }
     </style>
     <body>
-        <form action="#" onsubmit="onsignup(event)">
        <label>Name:</label>   
-       <br> <input type="text"></br>
+       <br> <input type="text" id="username"></br>
        <br><label>Age:</label></br>
-       <br> <input type="text"></br>
+       <br> <input type="text" id="Age"></br>
        <br> <label>Graduation:</label></br>
-       <br> <input type="text"></br>
+       <br> <input type="text" id="Graduation"></br>
        <br><label>Year of pass:</label></br>
-       <br> <input type="text"></br>
-       <br><input type="button" value="submit"></br>
+       <br> <input type="text" id="Year of pass"></br>
+       <input type="submit" onclick="test()">
        </form>
     </body>
-    <script type="text/javascript">
-       let myobj = {
-        Name:"Nithin",
-        Age:26,
-        Graduation:'Btech',
-        'Year of pass':2020
-       }
-       let myobj_serialized = JSON.stringify(myobj);
-      localStorage.setItem("myobj",myobj_serialized);
-        console.log(localStorage);
-    </script>
-   
+    <script src="dom.js"></script>
+
 </html>
