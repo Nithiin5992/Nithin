@@ -1,10 +1,27 @@
+var abc =document.getElementById("item");
 function test(){
-  var uid = document.getElementById("username").value;
-  var Age =document.getElementById("Age").value
-  var Gr =document.getElementById("Graduation").value
-  var yr =document.getElementById("Year of pass").value
-  localStorage.setItem("Name",uid);
-  localStorage.setItem("Age",Age);
-  localStorage.setItem("Graduation",Gr);
-  localStorage.setItem("year",yr);
+var user = document.getElementById('username').value;
+var age = document.getElementById('Age').value;
+var Gr = document.getElementById('Graduation').value;
+var yr = document.getElementById('Year of pass').value;
+var li=document.createElement('li');
+li.className="details";
+li.appendChild(document.createTextNode(user+age+Gr+yr));
+abc.appendChild(li);
+console.log(li);
+var deleteBtn = document.createElement('button');
+deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+deleteBtn.appendChild(document.createTextNode('delete'));
+li.appendChild(deleteBtn);
+abc.appendChild(li);
 }
+abc.addEventListener('click', removeItem);
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      abc.removeChild(li);
+    }
+  }
+}
+
