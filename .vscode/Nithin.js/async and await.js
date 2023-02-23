@@ -43,5 +43,5 @@ async function getcoldrinks() {
         console.log(poppedElement)
         }}
 
-getbutter().await(getcoldrinks);
+getbutter().then(getcoldrinks);
 
