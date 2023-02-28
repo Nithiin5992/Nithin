@@ -43,3 +43,10 @@ function removeItem(e){
     }
   }
 }
+axios.get("https://crudcrud.com/api/41872313b2d947bc9079c7c80a8a00cd/Myuser")
+.then((responce)=>{
+    console.log(responce)
+})
+.catch((err) =>{
+    console.log(err)
+})
