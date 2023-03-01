@@ -15,7 +15,7 @@ const obj = {
     Gr,
     yr
 }
-axios.post("https://crudcrud.com/api/41872313b2d947bc9079c7c80a8a00cd/Myuser",obj)
+axios.post("https://crudcrud.com/api/4a6eae82e2c6428aa77406b2b32a5bef/user",obj)
 .then((responce)=>{
     console.log(responce)
 })
@@ -43,10 +43,44 @@ function removeItem(e){
     }
   }
 }
-axios.get("https://crudcrud.com/api/41872313b2d947bc9079c7c80a8a00cd/Myuser")
+window.addEventListener("DOMContentLoaded",()=>{
+axios.get("https://crudcrud.com/api/4a6eae82e2c6428aa77406b2b32a5bef/user")
+.then((responce)=>{
+    console.log(responce)
+    for(var i=0;i<responce.data.length;i++){
+        showuseronscreen(responce.data[i])
+    }
+})
+.catch((err) =>{
+    console.log(err)
+})
+})
+function showuseronscreen(user){
+    var li=document.createElement('li');
+    li.className="details";
+    li.appendChild(document.createTextNode(user.user+","+user.age+","+user.Gr+","+user.yr));
+    abc.appendChild(li);
+    var deleteBtn = document.createElement('button');
+deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+deleteBtn.appendChild(document.createTextNode('delete'));
+li.appendChild(deleteBtn);
+abc.appendChild(li);
+
+abc.addEventListener('click', removeItem);
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+
+      abc.removeChild(li);
+      axios.delete("https://crudcrud.com/api/4a6eae82e2c6428aa77406b2b32a5bef/user/user.id")
 .then((responce)=>{
     console.log(responce)
 })
 .catch((err) =>{
     console.log(err)
 })
+    }
+  }
+}
+}
