@@ -1,13 +1,22 @@
 
-var details=document.getElementById("form");
+var sellproduct=document.getElementById("form");
+var totalprice=document.getElementById("price")
 function submit()
-{var a=document.getElementById('Name').value
-
+{
+    var a=document.getElementById('SellingPrice').value;
+    var b=document.getElementById('ProductName').value;
+    var x=a;
+    var li2=document.createElement('li2')
+    li2.className=totalprice;
+    li2.appendChild(document.createTextNode(x))
+    console.log(li2)
+    totalprice.appendChild(li2);
 var obj =
     {
-      a
+      a,
+      b
     }
-axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",obj)
+axios.post("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user",obj)
 .then((responce)=>{
                     showuseronscreen(responce.data)
                   })
@@ -15,7 +24,7 @@ axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",ob
                 console.log(err)
                })
  window.addEventListener("DOMContentLoaded",()=>{
-        axios.get("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser")
+        axios.get("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user")
         .then((responce)=>{
             console.log(responce)
             for(var i=0;i<responce.data.length;i++){
@@ -31,15 +40,24 @@ axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",ob
   function showuseronscreen(user)
   {
     var li=document.createElement('li')
-    li.className=details;
-    li.appendChild(document.createTextNode(user.a));
+    li.className=sellproduct;
+    li.appendChild(document.createTextNode(user.b+user.a));
     console.log(li)
-    details.appendChild(li);
-    adddeletebtn(li)
-    addeditbtn(li)
-    details.addEventListener('click', removeuser);
-    details.addEventListener('click', edituser);
-    function removeuser(e)
+    sellproduct.appendChild(li);
+    adddeletebtn(li);
+    
+    sellproduct.addEventListener('click', removedetails);
+    totalprice.addEventListener('click', removed);
+    function removed(e)
+    {
+    if(e.target.classList.contains('delete'))
+    {
+     
+       x=x-a;
+       }
+    
+}
+    function removedetails(e)
     {
      
        if(e.target.classList.contains('delete'))
@@ -47,8 +65,8 @@ axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",ob
         if(confirm('Are You Sure?'))
           {
           var li = e.target.parentElement;
-          details.removeChild(li);
-          axios.delete("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser/"+user._id)
+          sellproduct.removeChild(li);
+          axios.delete("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user/"+user._id)
           .then((responce)=>{
                                console.log(responce);
                                
@@ -60,19 +78,8 @@ axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",ob
        
       }
     }
-    function edituser(e)
-    {
-     
-       if(e.target.classList.contains('Edit'))
-       {
-        if(confirm('Are You Sure?'))
-          {
-          removeuser(e)
-           
-          }
-       
-      }
-    }
+    
+
 }
    
    
@@ -82,16 +89,10 @@ axios.post("https://crudcrud.com/api/641ef2333b7d4d56836a91dbe8021506/myuser",ob
      deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
      deleteBtn.appendChild(document.createTextNode('delete'));
      li.appendChild(deleteBtn);
-     details.appendChild(li);
-  }
-  function addeditbtn(li)
-  {
-     var editBtn = document.createElement('button');
-     editBtn.className = 'btn btn-danger btn-sm float-right Edit';
-     editBtn.appendChild(document.createTextNode('Edit'));
-     li.appendChild(editBtn);
-     details.appendChild(li);
+     sellproduct.appendChild(li);
   }
  
-}
+  }
+
+  
   

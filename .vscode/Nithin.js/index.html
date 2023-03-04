@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <style>
-        body{
-            font-size: large;
-            font-style:oblique;
-            background-color: rgb(199, 218, 223);
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            font-weight: 300;
-            color:#0e46f1
-        }
-    </style>
+    
    <body>
-    <ul id="form" class="details">
-    <head>
-        <h1>Fill the form</h1>
-    </head>
-    <label>Name:</label>
-    <input type="text"id=Name >
-    <br></br>
-    <label>Age:</label>
-    <input type="text"id=Age >
-    <br></br>
-    <label>Date of birth:</label>
-    <input type="text"id=Name >
-    <br></br>
-    <label>Gender:</label>
-    <input type="text"id=Name >
-    <br></br>
+    <ul id="form" class="sellproduct">
+    <label>SellingPrice</label>
+    <input type="text"id=SellingPrice>
+    
+    <label>Product Name</label>
+    <input type="text"id=ProductName>
     <button onclick="submit()">
         proceed
     </button>
+    <br></br>
+</head>
+    <h1 style="font-size: larger;" id="products" class="productdetails">Products:</h1>
+</head> 
 </ul>
+
+    <br></br>
+   <div>
+    <ul id ="price" class="totalprice">
+    <label style="font-size: medium;">Total value worth of products:Rs:</label>
+    </ul>
+   </div>
+    
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
     <script src="dom.js"></script>
 </body>
