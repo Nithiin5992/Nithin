@@ -1,62 +1,58 @@
-
+var x=0;
 var sellproduct=document.getElementById("form");
-var totalprice=document.getElementById("price")
+var totalprice=document.getElementById("price");
+var num=document.getElementById("num");
+var products=document.getElementById("products")
+products.addEventListener('click', removedetails);
+products.addEventListener('click', editdetails);
 function submit()
 {
-    var a=document.getElementById('SellingPrice').value;
+ 
+    var a=parseInt(document.getElementById('SellingPrice').value);
     var b=document.getElementById('ProductName').value;
-    var x=a;
-    var li2=document.createElement('li2')
-    li2.className=totalprice;
-    li2.appendChild(document.createTextNode(x))
-    console.log(li2)
-    totalprice.appendChild(li2);
-var obj =
-    {
-      a,
-      b
-    }
-axios.post("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user",obj)
-.then((responce)=>{
-                    showuseronscreen(responce.data)
-                  })
-.catch((err) =>{
-                console.log(err)
-               })
- window.addEventListener("DOMContentLoaded",()=>{
-        axios.get("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user")
-        .then((responce)=>{
-            console.log(responce)
-            for(var i=0;i<responce.data.length;i++){
-                showuseronscreen(responce.data[i])
-            }
-        })
-        .catch((err) =>{
-            console.log(err)
-        })
-        })     
-        
-                   
-  function showuseronscreen(user)
-  {
-    var li=document.createElement('li')
-    li.className=sellproduct;
-    li.appendChild(document.createTextNode(user.b+user.a));
-    console.log(li)
-    sellproduct.appendChild(li);
-    adddeletebtn(li);
-    
-    sellproduct.addEventListener('click', removedetails);
-    totalprice.addEventListener('click', removed);
-    function removed(e)
-    {
-    if(e.target.classList.contains('delete'))
-    {
+  
+    var obj={
+      "SellingPrice":a,
+      "ProductName":b,
+     }
+     axios.post("https://crudcrud.com/api/3d490345d64743b7905c3c8d92dd0001/myobj",obj)
+     .then((responce)=>console.log(responce))
+     .catch((err) =>console.log(err))
+     showuser(obj)
+ }
+   function showuser(obj){
+      var li=document.createElement('li');
      
-       x=x-a;
-       }
+      li.appendChild(document.createTextNode(obj.ProductName+'-Rs:'+obj.SellingPrice));
+      li.className=products;
+      li.id1=obj._id;
+      console.log(li.id)
+      li.id2=obj.SellingPrice
+      var dltbutton = document.createElement('button')
+      dltbutton.className = 'btn btn-danger btn-sm float-right delete';
+      dltbutton.appendChild(document.createTextNode('delete'));
+      li.appendChild(dltbutton);
+      const editbutton = document.createElement('button')
+      editbutton.className = 'btn btn-danger btn-sm float-right Edit';
+      editbutton.appendChild(document.createTextNode('Edit'));
+      li.appendChild(editbutton);
+      products.appendChild(li) ;
+      x=x+obj.SellingPrice;
+      num.textContent=x;
     
+  
 }
+window.addEventListener("DOMContentLoaded",()=>{
+axios.get("https://crudcrud.com/api/3d490345d64743b7905c3c8d92dd0001/myobj")
+.then((responce)=>{
+  for(var i=0;i<responce.data.length;i++){
+    showuser(responce.data[i]);
+  }
+})
+.catch((err) =>console.log(err))
+})
+
+  
     function removedetails(e)
     {
      
@@ -64,35 +60,30 @@ axios.post("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user",obj)
        {
         if(confirm('Are You Sure?'))
           {
-          var li = e.target.parentElement;
-          sellproduct.removeChild(li);
-          axios.delete("https://crudcrud.com/api/67150e97737541b482516c21de2abada/user/"+user._id)
-          .then((responce)=>{
-                               console.log(responce);
-                               
-                            })
-          .catch((err) =>{
-                          console.log(err)
-                         })
-          }
+          let li = e.target.parentElement;
+          products.removeChild(li);
+          axios.delete("https://crudcrud.com/api/3d490345d64743b7905c3c8d92dd0001/myobj/"+li.id1)
+          num.textContent=x-li.id2
+         
        
+          }
+        }
       }
-    }
-    
-
-}
-   
-   
-  function adddeletebtn(li)
-  {
-     var deleteBtn = document.createElement('button');
-     deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-     deleteBtn.appendChild(document.createTextNode('delete'));
-     li.appendChild(deleteBtn);
-     sellproduct.appendChild(li);
-  }
- 
-  }
-
-  
+      function editdetails(e)
+      {
+       
+         if(e.target.classList.contains('Edit'))
+         {
+          if(confirm('Are You Sure?'))
+            {
+              let li = e.target.parentElement;
+              products.removeChild(li);
+              axios.delete("https://crudcrud.com/api/3d490345d64743b7905c3c8d92dd0001/myobj/"+li.id1)
+              num.textContent=x-li.id2
+            submit();
+           
+         
+            }
+          }
+        }
   
