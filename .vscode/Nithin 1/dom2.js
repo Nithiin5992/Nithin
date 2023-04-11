@@ -5,7 +5,6 @@ expence.addEventListener("click",removedata)
 expence.addEventListener("click",editdata)
 
 function submit(){
-   
     var a=document.getElementById("Choose experiment").value;
     var b=document.getElementById("Description").value;
     var c=document.getElementById("mySelect").value;
