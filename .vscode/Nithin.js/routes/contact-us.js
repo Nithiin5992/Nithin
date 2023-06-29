@@ -9,4 +9,5 @@ const router = express.Router();
 // /admin/add-product => GET
 router.get('/contact-us', contactController.getcontact);
 
+
 module.exports = router;
