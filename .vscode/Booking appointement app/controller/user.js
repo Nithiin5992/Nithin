@@ -4,10 +4,12 @@ exports.getuser=(req,res,next) => {
     res.sendFile(path.join(__dirname,'../','views','user.html'))
     }
  exports.getuserdata = async (req, res, next) => {
-    console.log('kk')
-      const users=await  User.findAll()
-        
-            res.status(200).json({allUsers:users})
+    try{
+      const users=await User.findAll()
+      
+        res.status(200).json({allUsers:users})
+      }
+    catch(err){(console.log(err))}    
  }  
        
 exports.postuser=async (req,res,next) => {
@@ -30,6 +32,6 @@ exports.postuser=async (req,res,next) => {
 
 exports.deleteuser=(req,res,next)=>{
     const uId = req.params.id;
-    User.deletebyId(uId);
-
+    User.destroy({where:{id:uId}})
 }
+
