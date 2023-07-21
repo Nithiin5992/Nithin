@@ -1,10 +1,11 @@
 const path=require('./util/path')
 const express=require('express');
+const app=express();
 const sequelize = require('./util/database');
 var cors=require('cors')
 
 const bodyParser = require('body-parser');
-const app=express();
+
 const userroutes=require('./routes/user')
 app.use(bodyParser.json({extended: false}));
 app.set('view engine', 'ejs');
