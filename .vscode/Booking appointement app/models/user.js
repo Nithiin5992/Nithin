@@ -12,6 +12,11 @@ module.exports = class User {
     [this.username, this.password, this.email]
   );
 }
+static findAll(){
+  return db.execute(
+    'SELECT*FROM users'
+  );
+}
 static findById(id) {
   return db.execute(
     'SELECT*FROM users WHERE users.id=?',[id]
