@@ -16,18 +16,15 @@ exports.postuser=async (req,res,next) => {
     try{
            const username=req.body.username;
            const  password =req.body.password;
-           const Email = req.body.Email;
-   const data= await User.create(
-        {
-            username:username,
-            password:password,
-            email:Email
-        }
+           const email = req.body.Email;
+           
+           const user=new User(null,username,password,email)
+   const data= await user.save()
       
-   )
         res.status(201).json({newuser:data}) 
+        console.log('signup successful')
       
-  }catch(err){ console.log(err)}
+  }catch(err){ console.log('err')}
 }
 
 exports.deleteuser=(req,res,next)=>{

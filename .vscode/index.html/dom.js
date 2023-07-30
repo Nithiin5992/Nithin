@@ -1,6 +1,5 @@
 
 function submit() {
-  console.log("err")
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
   var Email = document.getElementById('Email').value;
@@ -13,9 +12,18 @@ function submit() {
       password,
       Email
     }
-    axios.post("http://localhost:4000/user/signup", obj)
-      .then(responce => {
-       console.log(responce)
-      })
+    postuser(obj);
   }
+}
+function postuser(newuser) {
+  axios.post("http://localhost:4000/user/signup", newuser)
+    .then(responce => {
+      console.log(responce)
+     alert(responce)
+    })
+    .catch((err) => {
+      console.log('err')
+      alert('request error')
+    });
+   
 }
