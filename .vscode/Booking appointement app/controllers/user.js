@@ -9,12 +9,14 @@ exports.userlogin = async (req, res, next) => {
     const email = req.body.Email;
     const password = req.body.password;
     const users = await User.findAll()
-
+    console.log(users[1].email)
     var flag = 0;
-    for (let i = 0; i < users[0].length; i++) {
-      if (users[0][i].email == email) {
+    for (let i = 0; i < users.length; i++) {
+      console.log(users[i].email)
+      if (users[i].email == email) {
+        console.log(users[i].email)
         flag = 1;
-        bcrypt.compare(password,users[0][i].password ,(err,result)=>{
+        bcrypt.compare(password,users[i].password ,(err,result)=>{
         if(err) {
 
           res.status(500).json({ message: 'something went wrong' })
@@ -54,10 +56,12 @@ exports.usersignup = async (req, res, next) => {
     
     const saltgrounds=10;
     bcrypt.hash(password,saltgrounds,async(err,hash)=>{
-    
-    const user = new User(null, username,hash, email)
-    const data = await user.save()
-    res.status(201).json({ newuser: data.message='signup successful' })
+    const data = await User.create({
+      username:username,
+      password:hash,
+      email:email
+    })
+    res.status(201).json({newuser: data,message:'signup successful' })
     console.log('signup successful')
     })
 

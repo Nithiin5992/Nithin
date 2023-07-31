@@ -1,4 +1,5 @@
 
+
 function submit() {
 var password = document.getElementById('password').value;
   var Email = document.getElementById('Email').value;
@@ -11,7 +12,8 @@ postuser(obj);
 function postuser(newuser) {
   axios.post("http://localhost:4000/user/login", newuser)
     .then(responce => {
-      alert(responce.data.message)
+      alert(responce.data.message);
+     
     
     })
     .catch((err) => {
