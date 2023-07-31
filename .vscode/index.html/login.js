@@ -11,7 +11,7 @@ postuser(obj);
 function postuser(newuser) {
   axios.post("http://localhost:4000/user/login", newuser)
     .then(responce => {
-      console.log(responce)
+      alert(responce.data.message)
     
     })
     .catch((err) => {
