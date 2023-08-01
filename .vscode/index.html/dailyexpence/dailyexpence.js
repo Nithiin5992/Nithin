@@ -1,7 +1,9 @@
 var details=document.getElementById('details');
 details.addEventListener('click', removeexpence);
 window.addEventListener("DOMContentLoaded",()=>{
-    axios.get("http://localhost:4000/dailyexpence")
+    const token =localStorage.getItem('token');
+    console.log(token)
+    axios.get("http://localhost:4000/dailyexpence",{headers:{'authorization':token}})
     .then((responce)=>{
       for(var i=0;i<responce.data.dailyexpence.length;i++){
         showuseronscreen(responce.data.dailyexpence[i])
@@ -17,11 +19,14 @@ function submit() {
     var expenceamount = document.getElementById('expenceamount').value;
     var description = document.getElementById('description').value;
     var category = document.getElementById('category').value;
+    
+    
    
       var obj = {
         expenceamount,
         description,
-        category
+        category,
+     
       }
       postuser(obj);
     }
