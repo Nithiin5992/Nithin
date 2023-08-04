@@ -2,7 +2,6 @@ var details=document.getElementById('details');
 details.addEventListener('click', removeexpence);
 window.addEventListener("DOMContentLoaded",()=>{
     const token =localStorage.getItem('token');
-    console.log(token)
     axios.get("http://localhost:4000/dailyexpence",{headers:{'authorization':token}})
     .then((responce)=>{
       for(var i=0;i<responce.data.dailyexpence.length;i++){
@@ -19,6 +18,7 @@ function submit() {
     var expenceamount = document.getElementById('expenceamount').value;
     var description = document.getElementById('description').value;
     var category = document.getElementById('category').value;
+    const token =localStorage.getItem('token');
     
     
    
@@ -26,13 +26,16 @@ function submit() {
         expenceamount,
         description,
         category,
+        token
      
       }
       postuser(obj);
     }
   
   function postuser(dailyexpence) {
-    axios.post("http://localhost:4000/dailyexpence", dailyexpence)
+    const token =localStorage.getItem('token');
+    
+    axios.post("http://localhost:4000/dailyexpence", dailyexpence,{headers:{'authorization':token}})
       .then(responce => {
         console.log(responce)
         
@@ -71,3 +74,29 @@ function submit() {
         }
       }
     }
+    document.getElementById('rzp_button1').onclick=async function(e){
+    const token=localStorage.getItem('token')
+    const responce=await axios.get("http://localhost:4000/purchase/purchasepremium",{headers:{'authorization':token}})
+        console.log(responce)
+       
+        var options={
+            "key":responce.data.key_id,
+            "orderid":responce.data.order.id,
+            "handler": async function(responce){
+             await  axios.post("http://localhost:4000/purchase/updatetransactionstatus",{
+                order_id:options.orderid,
+                payment_id:responce.rozarpay_payment_id
+              },{headers:{'authorization':token}})
+              alert("you are a premium user now")
+            }
+        }
+const rzpl=new Razorpay(options);
+rzpl.open();
+e.preventDefault()
+rzpl.on('payment failed',function(responce){
+    alert("somethingwentwrong")
+
+})
+    }
+
+    
