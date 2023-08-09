@@ -3,24 +3,24 @@ details.addEventListener('click', removeexpence);
 window.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem('token');
   const premiumuser = localStorage.getItem('premiumuser');
-  if(premiumuser=='null'){
-  getexpence(token);
-  console.log('nithin')
+  if (premiumuser == 'null') {
+    getexpence(token);
+    console.log('nithin')
   }
   else {
     getexpence(token);
     console.log(premiumuser)
-     updatepremiumuser();
+    updatepremiumuser();
   }
-  
-  
+
+
 })
 
 function submit() {
   var expenceamount = document.getElementById('expenceamount').value;
   var description = document.getElementById('description').value;
   var category = document.getElementById('category').value;
- 
+
   var obj = {
     expenceamount,
     description,
@@ -97,8 +97,8 @@ document.getElementById('rzp_button1').onclick = async function (e) {
         payment_id: responce.rozarpay_payment_id
       }, { headers: { 'authorization': token } })
       alert("you are a premium user now")
-      localStorage.updateItem('premiumuser','true')
-     updatepremiumuser();
+      localStorage.updateItem('premiumuser', 'true')
+      updatepremiumuser();
     }
   }
   const rzpl = new Razorpay(options);
@@ -109,25 +109,27 @@ document.getElementById('rzp_button1').onclick = async function (e) {
 
   })
 }
-function updatepremiumuser(){
+function updatepremiumuser() {
   var premiumbutton = document.getElementById('rzp_button1')
   var li = premiumbutton.parentElement;
   li.replaceChild(document.createTextNode('you are a premium user'), premiumbutton);
-  var leaderboardbutton=document.createElement('button');
+  var leaderboardbutton = document.createElement('button');
   leaderboardbutton.appendChild(document.createTextNode('ShowLeaderBoard'));
   li.appendChild(leaderboardbutton);
-  leaderboardbutton.id='leaderboardbutton';
-  leaderboardbutton.onclick=showleaderboard(li)
+  leaderboardbutton.id = 'leaderboardbutton';
+  leaderboardbutton.onclick = showleaderboard(li)
 }
 
-function showleaderboard(parent){
+function showleaderboard(parent) {
   axios.get("http://localhost:4000/premium/leaderboard")
-  .then(responce=>{
-    console.log(responce)
-    var li=document.createElement('li')
-   li.appendChild(document.createTextNode(responce.data.username+'-'+responce.data.expenceamount))
-   parent.appendChild(li)
-  }).catch((err)=>console.log(err))
+    .then(responce => {
+      console.log(responce)
+      for (let i = 0; i < responce.data.length; i++) {
+        var li = document.createElement('li')
+        li.appendChild(document.createTextNode(responce.data[i].username + '-' + responce.data[i].totalcost))
+        parent.appendChild(li)
+      }
+    }).catch((err) => console.log(err))
 }
 
 
