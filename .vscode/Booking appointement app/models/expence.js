@@ -12,6 +12,7 @@ const Expence = sequelize.define('dailyexpence', {
     expenceamount: Sequelize.INTEGER,
     description: Sequelize.STRING,
     category: Sequelize.STRING
+ 
 });
 
 module.exports = Expence;

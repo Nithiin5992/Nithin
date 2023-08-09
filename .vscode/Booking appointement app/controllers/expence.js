@@ -4,16 +4,18 @@ exports.postdailyexpence = async (req, res, next) => {
         const expenceamount = req.body.expenceamount;
         const description = req.body.description;
         const category = req.body.category;
-        const userid=req.user.id
-     
-        
+        const userid=req.user.id;
+        const totalexpence=parseInt(req.body.expenceamount)+parseInt(req.user.totalexpence);
         const data = await Expence.create({
             expenceamount: expenceamount,
             description: description,
             category:category,
             userId:userid
-            
         })
+        req.user.update({
+            totalexpence:totalexpence
+        })
+
         res.status(200).json({ dailyexpence: data, message: 'added daily expence' })
     }
     catch (err) {
@@ -28,5 +30,6 @@ exports.getdailyexpence = async (req, res, next) => {
 }
 exports.deletedailyexpence = (req, res, next) => {
     const id = req.params.id
-    Expence.destroy({ where: { id: id } })
+   
+    Expence.distroy({ where: { id: id } })
 }

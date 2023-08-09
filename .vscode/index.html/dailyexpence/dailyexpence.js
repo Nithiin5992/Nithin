@@ -1,5 +1,6 @@
 var details = document.getElementById('details');
 details.addEventListener('click', removeexpence);
+var totalexpence=0;
 window.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem('token');
   const premiumuser = localStorage.getItem('premiumuser');
@@ -9,7 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   else {
     getexpence(token);
-    console.log(premiumuser)
     updatepremiumuser();
   }
 
@@ -17,14 +17,14 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 function submit() {
-  var expenceamount = document.getElementById('expenceamount').value;
+  var expenceamount = parseInt(document.getElementById('expenceamount').value);
   var description = document.getElementById('description').value;
   var category = document.getElementById('category').value;
-
+  console.log(totalexpence)
   var obj = {
     expenceamount,
     description,
-    category
+    category,
   }
   postexpence(obj);
 }
@@ -61,7 +61,6 @@ function postexpence(dailyexpence) {
 
 }
 function showuseronscreen(dailyexpence) {
-  console.log('nithihn')
   var li = document.createElement('li');
   li.class = 'details';
   li.appendChild(document.createTextNode(dailyexpence.category + '-' + dailyexpence.expenceamount + '(' + dailyexpence.description + ')'))
@@ -78,6 +77,7 @@ function removeexpence(e) {
     if (confirm('Are You Sure?')) {
       let li = e.target.parentElement;
       details.removeChild(li);
+      const token = localStorage.getItem('token');
       axios.delete("http://localhost:4000/dailyexpence/" + li.id)
 
     }
@@ -126,7 +126,7 @@ function showleaderboard(parent) {
       console.log(responce)
       for (let i = 0; i < responce.data.length; i++) {
         var li = document.createElement('li')
-        li.appendChild(document.createTextNode(responce.data[i].username + '-' + responce.data[i].totalcost))
+        li.appendChild(document.createTextNode(responce.data[i].username + '-' + responce.data[i].totalexpence))
         parent.appendChild(li)
       }
     }).catch((err) => console.log(err))
