@@ -1,6 +1,4 @@
 const Expence = require('../models/expence');
-const jwt=require("jsonwebtoken");
-
 exports.postdailyexpence = async (req, res, next) => {
     try {
         const expenceamount = req.body.expenceamount;
@@ -25,7 +23,7 @@ exports.postdailyexpence = async (req, res, next) => {
 exports.getdailyexpence = async (req, res, next) => {
    
     const expences = await Expence.findAll({where:{userId:req.user.id}})
-    res.status(200).json({ dailyexpence: expences })
+    res.status(201).json({ dailyexpence: expences })
 
 }
 exports.deletedailyexpence = (req, res, next) => {

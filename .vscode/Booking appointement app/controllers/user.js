@@ -6,9 +6,10 @@ exports.getuser = (req, res, next) => {
   res.sendFile(path.join(__dirname, '../', 'views', 'user.html'))
 }
 
-function generatetoken(id) {
-  return jwt.sign({ userid: id }, 'secretkey')
-}
+function generatetoken(id,premiumuser) {
+    return jwt.sign({ userid: id }, 'secretkey');
+  }
+
 exports.userlogin = async (req, res, next) => {
   try {
     const email = req.body.Email;
@@ -27,8 +28,10 @@ exports.userlogin = async (req, res, next) => {
 
           }
           if (result === true) {
-            res.status(201).json({ message: 'login successful', token: generatetoken(users[i].id) })
-            console.log('login successful')
+           
+             console.log(users[i].premiumuser)
+              res.status(202).json({ message: 'login successful', token: generatetoken(users[i].id),premiumuser:users[i].premiumUser })
+              
           }
           else {
             res.status(401).json({ message: 'User not authorized' })

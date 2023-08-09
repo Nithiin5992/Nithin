@@ -9,7 +9,7 @@ exports.purchasepremium = async (req, res, next) => {
         const amount = 2500;
         rzp.orders.create({ amount, currency: "INR" }, (err, order) => {
             if (err) {
-                throw new Error(JSON.srtingify(err))
+                console.log(err);
             }
 
             Order.create({
@@ -31,7 +31,7 @@ exports.updateTransactionStatus = async (req, res) => {
 
         const { payment_id, order_id } = req.body;
         Order.findOne({ where: { orderid: order_id } }).then(order => {
-            console.log(order)
+            
             order.update({ paymentid: payment_id, status: 'successful' })
                 .then(() => {
                     req.user.update({ premiumUser: true })

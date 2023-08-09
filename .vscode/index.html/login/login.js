@@ -13,12 +13,13 @@ function postuser(newuser) {
   axios.post("http://localhost:4000/user/login", newuser)
     .then(responce => {
       alert(responce.data.message);
+      window.location.href = "C:/Users/Nithin%20kumar/Desktop/Nithin/.vscode/index.html/dailyexpence/dailyexpence.html";
+      
       localStorage.setItem('token',responce.data.token)
-      window.location.href = "http://127.0.0.1:5501/dailyexpence/dailyexpence.html";
-    
+      localStorage.setItem('premiumuser',responce.data.premiumuser)
     })
     .catch((err) => {
-      console.log('err')
+      console.log(err)
       alert(err.message)
     });
 }
