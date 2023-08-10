@@ -31,7 +31,7 @@ exports.updateTransactionStatus = async (req, res) => {
 
         const { payment_id, order_id } = req.body;
         Order.findOne({ where: { orderid: order_id } }).then(order => {
-            
+
             order.update({ paymentid: payment_id, status: 'successful' })
                 .then(() => {
                     req.user.update({ premiumUser: true })

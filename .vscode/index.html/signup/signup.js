@@ -19,12 +19,12 @@ function postuser(newuser) {
   axios.post("http://localhost:4000/user/signup", newuser)
     .then(responce => {
       console.log(responce);
-     alert(responce.data.message);
-    
+      alert(responce.data.message);
+
     })
     .catch((err) => {
       console.log('err')
       alert('request error')
     });
-   
+
 }

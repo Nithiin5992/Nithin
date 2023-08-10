@@ -4,8 +4,8 @@ const sequelize = require('../util/database');
 exports.leaderboard = async (req, res) => {
     try {
         const data = await User.findAll({
-            attributes: ['username','totalexpence'],
-           
+            attributes: ['username', 'totalexpence'],
+
 
         })
 

@@ -1,6 +1,6 @@
 var details = document.getElementById('details');
 details.addEventListener('click', removeexpence);
-var totalexpence=0;
+var totalexpence = 0;
 window.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem('token');
   const premiumuser = localStorage.getItem('premiumuser');
