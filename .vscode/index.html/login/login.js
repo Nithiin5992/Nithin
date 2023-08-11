@@ -13,7 +13,7 @@ function postuser(newuser) {
   axios.post("http://localhost:4000/user/login", newuser)
     .then(responce => {
       alert(responce.data.message);
-      window.location.href = "C:/Users/Nithin%20kumar/Desktop/Nithin/.vscode/index.html/dailyexpence/dailyexpence.html"
+      window.location.href = "http://127.0.0.1:5501/dailyexpence/dailyexpence.html"
       localStorage.setItem('token', responce.data.token)
       localStorage.setItem('premiumuser', responce.data.premiumuser)
     })
@@ -28,5 +28,6 @@ function forgotpassword(){
   var obj={
     email
   }
-  axios.post('http://localhost:4000/password/forgotpassword',obj)
+  const token = localStorage.getItem('token');
+  axios.post('http://localhost:4000/password/forgotpassword',obj,{ headers: { 'authorization': token } })
 }

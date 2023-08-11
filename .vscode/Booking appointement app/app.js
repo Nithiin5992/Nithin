@@ -3,7 +3,8 @@ const app = express();
 const sequelize = require('./util/database');
 const User = require('./models/user')
 const Expence = require('./models/expence');
-const Order = require("./models/order")
+const Order = require("./models/order");
+const Forgotpassword=require("./models/forgotpassword");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const userroutes = require('./routes/user');
@@ -22,7 +23,10 @@ User.hasMany(Expence);
 Expence.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
-sequelize.sync()
+User.hasMany(Forgotpassword);
+Forgotpassword.belongsTo(User);
+
+sequelize.sync({force:true})
     .then((responce) => {
         app.listen(4000);
     })
