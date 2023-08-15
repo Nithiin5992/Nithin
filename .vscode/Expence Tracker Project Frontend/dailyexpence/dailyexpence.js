@@ -41,9 +41,11 @@ function getexpence(token,i) {
             createbutton(expencelist, 'NextPage', 'NextPage');
             NextPage.onclick = function () {
               expence.removeChild(expencelist);
+              createbutton(expencelist, 'PreviousPage', 'PreviousPage');
               const token = localStorage.getItem('token');
               getexpence(token,i)
             }
+            
             break;
         }
       }
