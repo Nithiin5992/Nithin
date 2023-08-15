@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
 const Product = require('./models/product');
-const User = require('./models/user');
+const User = require
+("./models/user")
 const Cart = require('./models/cart');
 const CartItem = require('./models/cart-item');
 
@@ -45,23 +46,19 @@ Product.belongsToMany(Cart, { through: CartItem });
 sequelize
   .sync({ force: true })
   
-  .then(result => {
-    return User.findById(1);
-    // console.log(result);
-  })
-  .then(user => {
-    if (!user) {
-      return User.create({ name: 'Max', email: 'test@test.com' });
+  async (result) => {
+     User.findByid(1);
+    console.log(result);
+  try{
+     if (!user) {
+      await User.create({ name: 'Max', email: 'test@test.com' });
     }
-    return user;
-  })
-  .then(user => {
-    // console.log(user);
-    return user.createCart();
-  })
-  .then(cart => {
-    app.listen(3000);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+  
+    await user.createCart();
+
+    await app.listen(4200);
+
+}catch(err){
+  console.log(err)
+}
+}
