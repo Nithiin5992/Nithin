@@ -4,17 +4,19 @@ var expence = document.getElementById('expences');
 expence.addEventListener('click', removeexpence);
 var totalexpence = 0;
 window.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem('token');
   const premiumuser = localStorage.getItem('premiumuser');
-
-  getexpence(token,0);
+  
+  const token = localStorage.getItem('token');
+  getexpence(token,0)
   if (premiumuser == 'true') {
     getexpence(token,0);
     updatepremiumuser();
   }
-
-
 })
+function rowrange(){
+  var rows=document.getElementById('rows').value
+  localStorage.setItem('rows',rows)
+}
 
 function submit() {
   var expenceamount = parseInt(document.getElementById('expenceamount').value);
@@ -29,6 +31,7 @@ function submit() {
   postexpence(obj);
 }
 function getexpence(token,i) {
+  let rows=localStorage.getItem('rows')
   axios.get("http://localhost:4000/dailyexpence", { headers: { 'authorization': token } })
     .then((responce) => {
       let count = 0;
@@ -37,7 +40,7 @@ function getexpence(token,i) {
          
           showuseronscreen(responce.data.dailyexpence[i],expencelist)
           count++
-          if (count == 9) {
+          if (count == rows) {
             createbutton(expencelist, 'NextPage', 'NextPage');
             NextPage.onclick = function () {
               expence.removeChild(expencelist);
