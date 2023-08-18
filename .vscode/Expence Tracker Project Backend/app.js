@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const sequelize = require('./util/database');
 const fs=require('fs')
-
+require('dotenv').config();
 const User = require('./models/user')
 const Expence = require('./models/expence');
 const Order = require("./models/order");
