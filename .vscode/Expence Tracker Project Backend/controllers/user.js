@@ -67,8 +67,8 @@ exports.usersignup = async (req, res, next) => {
         username: username,
         password: hash,
         email: email,
-        totalexpence:0,
-        premiumUser:false
+        totalexpence: 0,
+        premiumUser: false
       })
       res.status(201).json({ newuser: data, message: 'signup successful' })
       console.log('signup successful')

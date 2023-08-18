@@ -1,6 +1,7 @@
 const Expence = require('../models/expence');
 const sequelize = require('../util/database');
 const User = require('../models/user');
+
 exports.postdailyexpence = async (req, res, next) => {
     try {
         const t = await sequelize.transaction();

@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-
 const sequelize = require('../util/database');
 
 const downloadedurl = sequelize.define('url', {
@@ -7,10 +6,10 @@ const downloadedurl = sequelize.define('url', {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoIncrement:true
+        autoIncrement: true
     },
     url: Sequelize.STRING,
-    
+
 
 });
 

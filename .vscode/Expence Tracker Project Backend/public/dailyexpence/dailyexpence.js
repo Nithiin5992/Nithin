@@ -5,17 +5,17 @@ expence.addEventListener('click', removeexpence);
 var totalexpence = 0;
 window.addEventListener("DOMContentLoaded", () => {
   const premiumuser = localStorage.getItem('premiumuser');
-  
+
   const token = localStorage.getItem('token');
-  getexpence(token,0)
+  getexpence(token, 0)
   if (premiumuser == 'true') {
-    getexpence(token,0);
+    getexpence(token, 0);
     updatepremiumuser();
   }
 })
-function rowrange(){
-  var rows=document.getElementById('rows').value
-  localStorage.setItem('rows',rows)
+function rowrange() {
+  var rows = document.getElementById('rows').value
+  localStorage.setItem('rows', rows)
 }
 
 function submit() {
@@ -30,26 +30,26 @@ function submit() {
   }
   postexpence(obj);
 }
-function getexpence(token,i) {
-  let rows=localStorage.getItem('rows')
+function getexpence(token, i) {
+  let rows = localStorage.getItem('rows')
   axios.get("http://localhost:4000/dailyexpence", { headers: { 'authorization': token } })
     .then((responce) => {
       let count = 0;
       var expencelist = document.createElement('expencelist');
-        for (i; i < responce.data.dailyexpence.length; i++) {
-         
-          showuseronscreen(responce.data.dailyexpence[i],expencelist)
-          count++
-          if (count == rows) {
-            createbutton(expencelist, 'NextPage', 'NextPage');
-            NextPage.onclick = function () {
-              expence.removeChild(expencelist);
-              createbutton(expencelist, 'PreviousPage', 'PreviousPage');
-              const token = localStorage.getItem('token');
-              getexpence(token,i)
-            }
-            
-            break;
+      for (i; i < responce.data.dailyexpence.length; i++) {
+
+        showuseronscreen(responce.data.dailyexpence[i], expencelist)
+        count++
+        if (count == rows) {
+          createbutton(expencelist, 'NextPage', 'NextPage');
+          NextPage.onclick = function () {
+            expence.removeChild(expencelist);
+            createbutton(expencelist, 'PreviousPage', 'PreviousPage');
+            const token = localStorage.getItem('token');
+            getexpence(token, i)
+          }
+
+          break;
         }
       }
       console.log(responce)
@@ -78,7 +78,7 @@ function postexpence(dailyexpence) {
     });
 
 }
-function showuseronscreen(dailyexpence,expencelist) {
+function showuseronscreen(dailyexpence, expencelist) {
   var li = document.createElement('li');
   li.class = 'expencelist';
   li.appendChild(document.createTextNode(dailyexpence.category + '-' + dailyexpence.expenceamount + '(' + dailyexpence.description + ')'))
