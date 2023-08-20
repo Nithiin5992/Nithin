@@ -1,11 +1,11 @@
 const Expence = require('../models/expence');
-const aws = require('aws-sdk');
+
 require('dotenv').config();
 const downloadedurl = require("../models/downloadedurl");
 
 function uploadtoS3(data, filename) {
     const accessKeyId= process.env.AWS_ACCESS_KEY_ID;
-    const secretkey =  process.env.AWS_SECRET_ACCESS_KEY
+    const secretkey =  process.env.AWS_SECRET_ACCESS_KEY;
    
     const bucket_name = 'nithin5992';
     const s3bucket = new aws.S3({

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const sequelize = require('./util/database');
 const fs=require('fs')
+const path=require('path')
 require('dotenv').config();
 const User = require('./models/user')
 const Expence = require('./models/expence');
@@ -35,8 +36,8 @@ app.use(premiumroutes);
 app.use(passwordroutes);
 app.use(downloadroutes);
 app.use((req,res)=>{
-    console.log(url,req.url)
-   res.sendFile(path.join(__dirname,'public','req.url'))
+
+   res.sendFile(path.join(__dirname,'public',req.url))
 })
 User.hasMany(Expence);
 Expence.belongsTo(User);
@@ -51,4 +52,4 @@ sequelize.sync()
     .then((responce) => {
         app.listen(4000);
     })
-    .catch(err => console.log('err'))
+    .catch(err => console.log(err))
