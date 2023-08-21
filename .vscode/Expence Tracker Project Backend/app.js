@@ -33,7 +33,7 @@ app.use(expenceroutes);
 app.use(purchaseroutes)
 app.use(premiumroutes);
 app.use(passwordroutes);
-app.use(downloadroutes);
+//app.use(downloadroutes);
 app.use((req,res)=>{
     console.log(url,req.url)
    res.sendFile(path.join(__dirname,'public','req.url'))
@@ -47,8 +47,8 @@ Forgotpassword.belongsTo(User);
 User.hasMany(downloadedurl);
 downloadedurl.belongsTo(User);
 
-sequelize.sync()
+sequelize.sync({force:true})
     .then((responce) => {
         app.listen(4000);
     })
-    .catch(err => console.log('err'))
+    .catch(err => console.log(err))
